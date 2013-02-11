@@ -142,9 +142,14 @@ def handle_events(events):
 
                 if 0 < mouse_y < 80:
                     # max_health
-                    max_health += 5*change_direction
-                    if max_health < 5:
-                        max_health = 5
+                    if max_health >= 5:
+                        max_health += 5*change_direction
+                        if max_health < 5:
+                            max_health = 4
+                    else:
+                        max_health += 1*change_direction
+                    if max_health < 1:
+                        max_health = 1
                 elif 80 < mouse_y < 160:
                     # min_health
                     min_health += 5*change_direction
@@ -208,7 +213,7 @@ def reset(fillrandom=True):
 
     if fillrandom:
         for i in xrange(50):
-            grid[random.randint(0,height-1)][random.randint(0,width-1)].health = random.randint(min_health + 0.75*(max_health - min_health), max_health)
+            grid[random.randint(0,height-1)][random.randint(0,width-1)].health = random.randint(int(min_health + 0.75*(max_health - min_health)), max_health)
 
 reset(fillrandom=False)
 
